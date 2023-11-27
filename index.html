@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164338286-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-164338286-1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="TibiaLootSplit" content="Quick and easy splitting of loot using the Tibia 'Party Hunt' analyser">
+    <meta name="keywords"
+        content="Tibia, Tibia Loot, Tibia Loot Split, TibiaLootSplit, Split Tibia Loot, Tibia Loot Analyser, Tibia Loot Share, Tibia Share Loot">
+    <meta name="author" content="Pawel Kusnierek">
+    <link rel="shortcut icon" href="images/coin.png" type="image/x-icon">
+    <title>Divisor de Loot</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player de Áudio (Rádio e Música Local)</title>
+</head>
+<body>
+    <select id="audioSelect">
+        <option value="https://live.hunter.fm/pop_high">Pop</option>
+        <option value="https://stream-157.zeno.fm/k9gy85cgwy8uv?zs=tHT3Pu19QrOuUZB64Qy5og">Funk</option>
+        <option value="https://live.hunter.fm/rock_high">Rock</option>
+        <option value="https://live.hunter.fm/hitsbrasil_high">Hits Brasil</option>
+        <option value="https://live.hunter.fm/pagode_high">Pagode</option>
+        <option value="https://live.hunter.fm/sertanejo_high">Sertanejo</option>
+        <option value="https://radio.stmsrv.com:8120/stream">Eletrônica</option>
+        <option value="musicas/poesia.m4a">Poesia Acustica</option>
+    </select>
+    <button onclick="playAudio()">Tocar</button>
+    <button onclick="stopAudio()">Parar</button>
+    <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1" onchange="changeVolume()">
+    
+    <audio id="audioPlayer" controls style="display: none;"></audio>
+    
+    <script>
+        var audioPlayer = document.getElementById('audioPlayer');
+        var audioSelect = document.getElementById('audioSelect');
+        var volumeControl = document.getElementById('volumeControl');
+        
+        function playAudio() {
+            var selectedAudio = audioSelect.value;
+            audioPlayer.src = selectedAudio;
+            audioPlayer.play();
+            audioPlayer.volume = volumeControl.value;
+        }
+        
+        function stopAudio() {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        }
+        
+        function changeVolume() {
+            audioPlayer.volume = volumeControl.value;
+        }
+    </script>
+</body>
+</html>
+
+<body>
+
+        <div id="page-containter">
+        <div id="left-sidebar">
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>Jogadores Online:&nbsp;<span id="onlinePlayers" style="color: #00ff00;">Carregando...</span></strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong><span id="characterData-aamon">Carregando...</span></strong></h2>
+            <h2><strong><span id="characterData-nebul">Carregando...</span></strong></h2>
+        </div>
+        <div id="main-content">
+            <img src="images/logo.gif" alt="Picture of 'Party Hunt' analsyer highlighting which button to click" />
+            <form>
+                <input type="text" id="analyserData" name="analyserData"
+                    placeholder="Paste party hunt session log here..." autocomplete="off"><br>
+                <input type="submit" id="submitbutton" value="Calcular" onclick="submit_form()" />
+                <input type="button" onclick="location.href='https:/\/probably-modern-donkey.ngrok-free.app/';" value="Limpar" />
+            </form>            
+        </div>
+        <div id="right-sidebar">&nbsp;</div>
+        <div id="footer">&nbsp;</div>
+    </div>
+</body>
+
+    <script>
+        const characters = ['aamon', 'nebul'];
+    
+        async function loadCharacterData(character) {
+            try {
+                const response = await fetch('get_character_data.php?name=' + encodeURIComponent(character));
+                const characterData = await response.text();
+                
+                document.getElementById('characterData-' + character).innerText = characterData.trim();
+            } catch (error) {
+                console.error('Erro ao carregar os dados do personagem:', error);
+                document.getElementById('characterData-' + character).innerText = 'Erro ao carregar';
+            }
+        }
+    
+        characters.forEach(character => {
+            setInterval(() => loadCharacterData(character), 5000);
+            window.addEventListener('DOMContentLoaded', () => loadCharacterData(character));
+        });
+    </script>
+    
+    
+    
+
+    <script>
+        // Função para carregar o número de jogadores online
+        async function loadOnlinePlayers() {
+            try {
+                const response = await fetch('get_online_players.php');
+                const playersOnline = await response.text();
+                
+                document.getElementById('onlinePlayers').innerText = playersOnline.trim();
+            } catch (error) {
+                console.error('Erro ao carregar os jogadores online:', error);
+                document.getElementById('onlinePlayers').innerText = 'Erro ao carregar';
+            }
+        }
+
+        // Atualizar a cada X milissegundos (por exemplo, a cada 30 segundos)
+        setInterval(loadOnlinePlayers, 5000); // 30000 milissegundos = 30 segundos
+        // Chamar a função pela primeira vez para carregar os jogadores online ao carregar a página
+        window.addEventListener('DOMContentLoaded', loadOnlinePlayers);
+    </script>
+
+</html>
