@@ -36,10 +36,9 @@
         <option value="https://live.hunter.fm/rock_high">Rock</option>
         <option value="https://live.hunter.fm/hitsbrasil_high">Hits Brasil</option>
         <option value="https://live.hunter.fm/pagode_high">Pagode</option>
-        <option value="https://stream-158.zeno.fm/0r0xa792kwzuv?zs=mfjA2tcUReuyW7vAipYGrA">Lofi</option>
         <option value="https://live.hunter.fm/sertanejo_high">Sertanejo</option>
         <option value="https://radio.stmsrv.com:8120/stream">Eletrônica</option>
-        <option value="https://centova5.transmissaodigital.com:20031/stream">Rap Nacional</option>
+        <option value="musicas/poesia.m4a">Poesia Acustica</option>
     </select>
     <button onclick="playAudio()">Tocar</button>
     <button onclick="stopAudio()">Parar</button>
@@ -75,14 +74,22 @@
 
         <div id="page-containter">
         <div id="left-sidebar">
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>Jogadores Online:&nbsp;<span id="onlinePlayers" style="color: #00ff00;">Carregando...</span></strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong>&nbsp;</strong></h2>
+            <h2><strong><span id="characterData-aamon">Carregando...</span></strong></h2>
+            <h2><strong><span id="characterData-nebul">Carregando...</span></strong></h2>
         </div>
         <div id="main-content">
             <img src="images/logo.gif" alt="Picture of 'Party Hunt' analsyer highlighting which button to click" />
             <form>
                 <input type="text" id="analyserData" name="analyserData"
-                    placeholder="" autocomplete="off"><br>
+                    placeholder="Paste party hunt session log here..." autocomplete="off"><br>
                 <input type="submit" id="submitbutton" value="Calcular" onclick="submit_form()" />
-                <input type="button" onclick="location.href='https:/\/jnrlima2.github.io/tibia-party';" value="Limpar" />
+                <input type="button" onclick="location.href='https:/\/probably-modern-donkey.ngrok-free.app/';" value="Limpar" />
             </form>            
         </div>
         <div id="right-sidebar">&nbsp;</div>
